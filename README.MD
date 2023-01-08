@@ -40,6 +40,10 @@ Of course manual action is needed by my side as the AI is not yet enough matured
 **Note:** the main branch is actually a develop branch as the software is still unmatured enough to be called even a beta.
 
 ## How it (should) work?
+In your main library you can choose which ROMs to sync in which devices, each device template can tell you if that system is supported or available in the selected device (supported = playable, available = avaliable but maybe not fully playable).
+When the device is connected it start to sync the ROMs and their scraped metadata and backup the saves/states.
+It will scan for the device searching which ROMs are not present in your library and it asks to be imported.
+On your Library will show the ROMs scraped metadata, images, boxarts, videos, RetroAchievement data and such.
 
 ### From template to actual device
 Mainly the software should match the template in `template/template-id.yaml` with the device data in `devices/frienly-name/friendly-name.yml`.
