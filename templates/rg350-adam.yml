@@ -1,0 +1,55 @@
+# RG350 with ADAM image
+rg350-adam:
+  name: RG350
+  template_version: 1.0
+  brand: Anbernic
+  saves-in-roms: true   # TODO: saves are inside roms folder
+  states: states
+  roms_path: roms
+  supported_systems:    # TODO: these are the directory names, they should refer to the original systems that the must be updated with the following folders
+    - 32X
+    - A2600
+    - A5200
+    - A7800
+    - AMIGA
+    - AMSTRAD
+    - ARCADE
+    - BBCMICRO
+    - C64
+    - COLECO
+    - CPS
+    - DAPHNE
+    - DOOM
+    - DOSBOX
+    - FBA
+    - FC
+    - FDS
+    - GB
+    - GBA
+    - GBC
+    - GG
+    - GW
+    - INTELLI
+    - LYNX
+    - MD
+    - MSX
+    - NEOGEO
+    - NGP
+    - PCE
+    - PCECD
+    - PICO8
+    - POKEMINI
+    - PS
+    - QUAKE
+    - QUAKE2
+    - SCUMMVM
+    - SEGACD
+    - SFC
+    - SG1000
+    - SGB
+    - SMS
+    - SUPERVISION
+    - TIC80
+    - VB
+    - WSC
+    - ZX

@@ -1,0 +1,16 @@
+# Miyoo Mini v3 - OnionOS
+miyoominiv3-onion:
+  name: Miyoo Mini
+  template_version: 0.1
+  brand: Ingenic
+  gamelist_file: miyoogamelist.xml
+  saves: saves
+  states: states
+  roms_path: ROMs
+  supported_systems:
+    - gb
+    - gbc
+  available_systems:
+    - nes
+    - snes
+    - megadrive
