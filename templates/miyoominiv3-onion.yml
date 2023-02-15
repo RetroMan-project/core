@@ -4,11 +4,15 @@ miyoominiv3-onion:
   template_version: 0.1
   brand: Ingenic
   gamelist_file: miyoogamelist.xml
-  saves: saves
-  states: states
+  saves: Saves/CurrentProfile/saves
+  states: Saves/CurrentProfile/states
   roms_path: ROMs
   supported_systems:
     - gb
+      - gamabtte:
+          default: true
+          saves: _savesdir_/Gambatte
+          states: _statesdir_/Gambatte
     - gbc
   available_systems:
     - nes
