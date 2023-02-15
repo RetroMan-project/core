@@ -21,6 +21,7 @@ This super hero software aims to be the only solution when comes to manage your 
 ## Nice to have:
 - Saves sync between devices if supported, or enforced
 - ARCADE romsets support
+- Collection support (move collections in and over)
 - Format conversions (chd for example)
 - m3u generation
 - folder as a file support
