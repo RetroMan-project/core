@@ -1,3 +1,7 @@
 id: miyoominiv3-onion
 friendly_name: Miyoo Mini (OnionOS)
 device_root: /home/public-folder/gits/RetroMan/test/My MIyoo Mini
+force_decompression: true
+import:
+  - miyomini
+  - onionos
