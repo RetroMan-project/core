@@ -10,6 +10,7 @@ library:
         manufacturer: MAME
         system_folders:
             - arcade
+            - mame
         extensions:
             - zip
             - 7z
@@ -487,6 +488,8 @@ library:
           - bin
           - zip
           - 7z
+    
+    # TODO: mastersystem
 
     - msx:
         name: Microsoft MSX
