@@ -17,6 +17,7 @@ This super hero software aims to be the only solution when comes to manage your 
 - It knows which system are supported or available on the device (supported = surely working, available = emulator is available but may not be really playable)
 - Duplicates management
 - CLI support
+- Rom renaming system
 
 ## Nice to have:
 - Saves sync between devices if supported, or enforced
@@ -28,6 +29,7 @@ This super hero software aims to be the only solution when comes to manage your 
 - cloud storage support
 - webserver
 - ROMtation
+- Plugin system
 
 ## ROMtation:
 A ROM rortation system: when you got a limited memory on your device the ROMtation can be enabled, if enabled it removes the oldest/unused ROMs to make space to the new ones.
