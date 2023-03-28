@@ -4,6 +4,7 @@ import logging
 
 from generate_gamelist import generate_gamelist
 
+
 def get_device_data(device_name):
     """
     Given the name of a device, this function searches for a YAML file with the same name
@@ -11,7 +12,8 @@ def get_device_data(device_name):
     """
 
     # Set up logging
-    logging.basicConfig(filename='retroman.log', level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    logging.basicConfig(filename='retroman.log', level=logging.DEBUG, format='%(asctime)s %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p')
     logging.debug(f'Called get_device_data for: {device_name}')
 
     # Compute the path of the device file
@@ -22,11 +24,8 @@ def get_device_data(device_name):
         logging.error(f"Device file not found: {device_path}")
         raise ValueError(f"Device file not found: {device_path}")
 
-    # Set the path to the YAML file
-    file_path = f'devices/{device_name}/{device_name}.yml'
-
     # Load the data from the YAML file
-    with open(file_path) as f:
+    with open(device_path) as f:
         data = yaml.full_load(f)
 
     logging.debug(f"Device data: {data}")
@@ -61,7 +60,7 @@ def get_template_data(template_id):
     logging.debug(f"Template data: {template_data}")
     logging.debug('Returning it')
 
-    return template_data
+    return template_data[template_id]
 
 
 def get_library_data():
@@ -70,7 +69,8 @@ def get_library_data():
     """
 
     # Set up logging
-    logging.basicConfig(filename='retroman.log', level=logging.DEBUG, format='%(asctime)s %(message)s',datefmt='%m/%d/%Y %I:%M:%S %p')
+    logging.basicConfig(filename='retroman.log', level=logging.DEBUG, format='%(asctime)s %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p')
     logging.debug('Called get_library_data')
 
     # Compute the path of the library file
@@ -89,34 +89,25 @@ def get_library_data():
 
     return library_data
 
+
 def update_system_data(data, library_data):
     """
     This function updates the system data in the given data with the values from the library data.
     """
-    # Extract the device ID from the data dictionary
-    device_id = list(data.keys())[0]
 
-    # Check if the data dictionary has a 'supported_systems' key
-    if 'supported_systems' not in data[device_id]:
-        raise KeyError("The data dictionary does not have a 'supported_systems' key")
+    # Check if the data dictionary has a 'systems' key
+    if 'systems' not in data:
+        raise KeyError("The data dictionary does not have a 'systems' key")
 
     # Get the list of systems from the data
-    supported_systems = data[device_id]['supported_systems']
+    systems = data['systems']
+    library_systems = library_data['library']['systems']
 
-    # Iterate through the supported_systems list and update the values if needed
-    for system in supported_systems:
-        # Check if the system has a value in the library data
-        if system in library_data:
-            # If the system is not present in the supported_systems list, add it to the list
-            if system not in supported_systems:
-                supported_systems.append(system)
-        else:
-            # If the system is not present in the library data, remove it from the supported_systems list
-            supported_systems.remove(system)
+    # TODO: parse the supported systems
+    # TODO: parse the available systems
 
     # Return the updated data
-    return data
-
+    return library_systems
 
 
 def generate_retro_gamelist(device_name, debug=False):
@@ -125,7 +116,8 @@ def generate_retro_gamelist(device_name, debug=False):
     """
 
     # Set up logging
-    logging.basicConfig(filename='retroman.log', level=logging.DEBUG if debug else logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    logging.basicConfig(filename='retroman.log', level=logging.DEBUG if debug else logging.INFO,
+                        format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
     logging.debug(f'Called generate_retro_gamelist for device name: {device_name}')
 
     # Get the device data from the YAML file
@@ -139,18 +131,20 @@ def generate_retro_gamelist(device_name, debug=False):
     library_data = get_library_data()
 
     # Update the system data in the template data
-    supported_systems = update_system_data(template_data, library_data)
+    systems = update_system_data(template_data, library_data)
 
     # Initialize the game list
     gamelist = []
 
     # Iterate through the supported systems
-    for system, data in supported_systems.items():
+    for system in systems:
         # Get the system name and the ROMs path from the system data
-        system_name = data['name']
-        roms_path= template_data['roms_path']
+        system_id = list(system.keys())[0]
+        system_name = system[system_id]['name']
+        roms_path = template_data['roms_path']
 
         # Generate the game list for the current system
+        # FIXME match the parameters with the definition of this function
         gamelist = generate_gamelist(system, gamelist, roms_path, library_data, debug)
 
     return gamelist
@@ -171,8 +165,8 @@ def generate_retro_gamelist(device_name, debug=False):
 # print(f'Library data: {library_data}')
 
 # # Test the update_system_data function
-# supported_systems = update_system_data(template_data, library_data)
-# print(f'Supported systems: {supported_systems}')
+# systems = update_system_data(template_data, library_data)
+# print(f'Supported systems: {systems}')
 
 # # Test the generate_retro_gamelist function
 # gamelist = generate_retro_gamelist(device_name)
